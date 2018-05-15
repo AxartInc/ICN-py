@@ -1,11 +1,20 @@
 from tkinter import *
+from random import randint
+
+who = 1
+whe = 0
+
+who = randint(0, 1)
+
+if who == 0:
+    whe =1
 
 def Clavier(event):
     """ Gestion de l'événement Appui sur une touche du clavier """
-    global PosX,PosY,PosX2,PosY2
+    global PosX,PosY,PosX2,PosY2,who,whe
     touche = event.keysym
     print(touche)
-    
+      
     #JOUEUR 1 
     
     # déplacement vers le haut
@@ -73,13 +82,29 @@ def Clavier(event):
             
             PosX2 = 20
             PosY2 = 20
-        
- 
-        
+            
+          
+            
+            if who == 1:
+                who = 0
+                whe = 1
+            elif whe == 1:
+                who = 1
+                whe = 0
+            
+
+           
     # on dessine le pion à sa nouvelle position
     Canevas.coords(Pion,PosX -10, PosY -10, PosX +10, PosY +10)
     Canevas.coords(Pion2,PosX2 -10, PosY2 -10, PosX2 +10, PosY2 +10)
     
+    if who==1:
+        Canevas.itemconfig(Pion, outline ='red')
+        Canevas.itemconfig(Pion2, outline ='white')
+    elif whe==1:
+        Canevas.itemconfig(Pion, outline ='white')
+        Canevas.itemconfig(Pion2, outline ='blue')
+        
 
 # Création de la fenêtre principale
 Mafenetre = Tk()
